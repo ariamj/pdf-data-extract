@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Files
+/data/T_slips_Kevin_Wu.pdf
+/data/sampleData.pdf
