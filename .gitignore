@@ -130,5 +130,10 @@ dmypy.json
 
 
 # Files
-/data/T_slips_Kevin_Wu.pdf
+/data/T_slips.pdf
 /data/sampleData.pdf
+/data/2022_SAMPLE.pdf
+data/Degree_Navigator.pdf
+
+# OutFiles
+/OutFiles
