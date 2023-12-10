@@ -8,8 +8,12 @@ html {
 
 body {
     margin: 0;
+    background-color: rgba(48, 48, 48, 1);
 }
 
+/*
+ * HEADER STYLING
+ */
 header {
     top: 0px;
     z-index: 99;
@@ -31,13 +35,13 @@ header h1 {
 .side-nav-button {
     /* background-color: rebeccapurple; */
     width: calc(var(--hamburger-circ-size) * 3 + 1rem);
-    display: flex;
+    /* display: flex; */
     position: fixed;
     right: 0;
-    justify-self: right;
     align-self: center;
-    align-items: center;
-    justify-content: space-evenly;
+    /* align-items: center; */
+    /* justify-content: space-evenly; */
+    cursor: pointer;
 }
 
 .side-nav-button .dot {
@@ -47,3 +51,103 @@ header h1 {
     border-radius: 50%;
     /* display: inline-block; */
 }
+
+.side-nav-button .dot:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.side-nav-button div {
+    width: 35px;
+    height: 5px;
+    background-color: rgba(217, 217, 217, 1);
+    margin: 6px 0;
+}
+
+.side-nav-button:hover .bar1,
+.side-nav-button:hover .bar2,
+.side-nav-button:hover .bar3 {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* 
+ * SIDE NAVIGATION
+ */
+/* Side Navigation Menu */
+.sidenav {
+    height: 100%;
+    width: 0; /* change with js */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25));
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+/* Navigation Menu Links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style close button */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 25px;
+    margin-left: 50px;
+}
+
+/* On smaller screens (height < 450px), change sidenav style (less padding & smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+
+/*
+ * CONVERSION PAGE STYLING
+ */
+ .conversion-page {
+    background-color: rgba(255, 0, 0, 0.2);
+    margin: 1rem;
+ }
+
+ .conversion-page h2 {
+    color: rgba(255, 255, 255, 1);
+    margin: 0.5rem;
+ }
+
+ .upload-settings-container {
+    background-color: rgba(0, 0, 255, 0.25);
+    display: flex;
+ }
+
+ .upload-container {
+    width: 27.375rem;
+    height: 11.75rem;
+    /* flex-shrink: 0; */
+    margin: 0.31rem;
+    border: 0.25rem dashed rgba(255, 255, 255, 0.50);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+ }
+
+ .settings-container {
+    width: 61.5rem;
+    height: 11.75rem;
+    /* flex-shrink: 0; */
+    margin: 0.31rem;
+    border: 5px dashed rgba(255, 255, 255, 0.50);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+ }

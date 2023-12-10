@@ -8,19 +8,37 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/greek_favicon_32px.png">
 
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="index.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
     <header>
         <h1>PDF Data Extractor</h1>
-        <section class="side-nav-button">
+        <section class="side-nav-button" onclick="openSideNav()">
+            <!-- <span class="dot"></span>
             <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+            <span class="dot"></span> -->
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </section>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSideNav()">&times;</a>
+            <a href="#">Bank Statements</a>
+            <a href="#">Customize</a>
+        </div>
     </header>
-    <section>
+    <section class="conversion-page">
         <h2>Convert Bank Statements</h2>
+        <div class="upload-settings-container">
+            <div class="upload-container">
+                <form action="/action_page.php">
+                    <input type="file" id="myFile" name="filename">
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="settings-container">SETTINGS</div>
+        </div>
+        <span style="font-size: 30px;cursor: pointer;" onmousedown="openSideNav()">&#9776;OPEN</span>
     </section>
 </body>
 </html>
