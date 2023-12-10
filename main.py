@@ -3,6 +3,8 @@ from pdfminer.high_level import extract_pages, extract_text
 import json
 import csv
 import tabula
+from img2table.document import PDF, Image
+from img2table.ocr import PaddleOCR
 
 
 ########################################################
@@ -64,17 +66,42 @@ import tabula
 ## CODE
 ########################################################
 
+# PAGE/TABLE SETTINGS
+tableArea = [25, 0, 98, 100]
+tableColumns = [20, 52, 69, 82]
+
+# FILE SETTINGS
+fileName = "Tamarind_JantoApril"
+filePages = 1
+
+# ocr = PaddleOCR()
+
+pdf = PDF(f"./data/{fileName}.pdf", pages=[0, 2])
+pdf_tables = pdf.extract_tables(borderless_tables=True)
+# pdf_tables = pdf.extract_tables(ocr=ocr, implicit_rows=False, borderless_tables=True, min_confidence=50)
+pdf.to_xlsx(f"./outFiles/{fileName}.xlsx", borderless_tables=True)
+
+numTables1 = len(pdf_tables)
+print(numTables1)
+print("==========================")
+print(pdf_tables[0])
+print("==========================")
+# if (numTables1 > 1):
+    # print(pdf_tables[1])
+
 # df = tabula.read_pdf("./data/Degree_Navigator.pdf", pages='all')
 # tabula.convert_into("./data/Degree_Navigator.pdf", "./outFiles/Degree_Navigator.csv", output_format="csv", pages='all')
-df = tabula.read_pdf("./data/2022_SAMPLE.pdf", pages=[1, 2], relative_area=True, relative_columns=True, area=[41, 0, 77, 100], columns=[30, 50, 65, 75])
-tabula.convert_into("./data/2022_SAMPLE.pdf", "./outFiles/2022_SAMPLE.csv", output_format="csv", pages=[1, 2], relative_area=True, relative_columns=True, area=[41, 0, 77, 100], columns=[30, 50, 65, 75])
-numTables = len(df)
-print(numTables)
-print("==========================")
-print(df[0])
-print("==========================")
-if (numTables > 1):
-    print(df[1])
+
+# SCRIPT
+# df = tabula.read_pdf(f"./data/{fileName}.pdf", pages=filePages, relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
+# tabula.convert_into(f"./data/{fileName}.pdf", f"./outFiles/{fileName}.csv", output_format="csv", pages=filePages, relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
+# numTables = len(df)
+# print(numTables)
+# print("==========================")
+# print(df[0])
+# print("==========================")
+# if (numTables > 1):
+#     print(df[1])
 # print(df)
 
 # df = tabula.read_pdf("./data/sampleData.pdf", pages='all')

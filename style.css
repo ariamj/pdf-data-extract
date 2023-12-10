@@ -1,0 +1,49 @@
+:root {
+    --hamburger-circ-size: 1rem;
+}
+
+html {
+
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    top: 0px;
+    z-index: 99;
+    margin: 0px;
+    position: sticky;
+    display: flex;
+    background-color: black;
+    color: rgba(255, 255, 255, 1);
+    height: 10vh;
+    width: 100%;
+}
+
+header h1 {
+    margin-left: 2vb;
+    justify-self: left;
+    align-self: center;
+}
+
+.side-nav-button {
+    /* background-color: rebeccapurple; */
+    width: calc(var(--hamburger-circ-size) * 3 + 1rem);
+    display: flex;
+    position: fixed;
+    right: 0;
+    justify-self: right;
+    align-self: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.side-nav-button .dot {
+    height: var(--hamburger-circ-size);
+    width: var(--hamburger-circ-size);
+    background-color: rgba(217, 217, 217, 1);
+    border-radius: 50%;
+    /* display: inline-block; */
+}
