@@ -6,6 +6,7 @@
 
     <title>PDF Data Extractor</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./images/greek_favicon_32px.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="index.js"></script>
@@ -14,9 +15,6 @@
     <header>
         <h1>PDF Data Extractor</h1>
         <section class="side-nav-button" onclick="openSideNav()">
-            <!-- <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span> -->
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
@@ -32,11 +30,47 @@
         <div class="upload-settings-container">
             <div class="upload-container">
                 <form action="/action_page.php">
-                    <input type="file" id="myFile" name="filename">
-                    <input type="submit">
+                    <label class="custom-btn file-upload-btn">
+                        <input type="file" id="myFile" class="button" name="filename">
+                        Upload
+                    </label>
+                    <label class="custom-btn convert-btn">
+                        <input type="submit">
+                        Convert
+                    </label>
                 </form>
             </div>
-            <div class="settings-container">SETTINGS</div>
+            <div class="settings-container">
+                <form name="fileType" id="fileType" action="/action_page.php">
+                    <select name="subject" id="subject" class="custom-btn">
+                        <option value="" selected="selected">Select upload type</option>
+                        <option value="">File</option>
+                        <option value="">Folder</option>
+                    </select>
+                </form>
+                <form name="numPages" id="numPages" action="/action_page.php">
+                    <div class="input-heading">Pages: </div>
+                    <input type="text" id="numPagesInput" class="custom-btn input-btn" style="text-align: left;" placeholder="1, 2,...all" pattern="([0-9]+)|(([0-9]+, ?[0-9]+)*)|(a{1}l{2})">
+                </form>
+                <form name="tableArea" id="tableArea" action="/action_page.php">
+                    <div class="input-heading">Table Area: </div>
+                    <input type="number" id="tableAreaTop" class="custom-btn table-area-input input-btn" placeholder="Top">
+                    <input type="number" id="tableAreaLeft" class="custom-btn table-area-input input-btn" placeholder="Left">
+                    <input type="number" id="tableAreaRight" class="custom-btn table-area-input input-btn" placeholder="Right">
+                    <input type="number" id="tableAreaBtm" class="custom-btn table-area-input input-btn" placeholder="Bottom">
+                </form>
+                <form name="tableColumns" id="tableColumns" action="/action_page.php">
+                    <div class="input-heading">Columns: </div>
+                    <input type="text" id="tableColumnsInput" class="custom-btn input-btn" style="text-align: left;" placeholder="30, 50, 75,..." pattern="([0-9]+)|(([0-9]+, ?[0-9]+)*)">
+                </form>
+            </div>
+        </div>
+        <div class="download-container">
+            <!-- TODO: COMPLETE JS FOR... -->
+            <!-- cite: https://www.w3schools.com/tags/tag_progress.asp#:~:text=Tip%3A%20Use%20the,the%20tag%20instead. -->
+            <progress id="convert-prog" value="32" max="100"></progress>
+            <br>
+            <button class="download-btn"><i class="fa fa-download"></i> DOWNLOAD</button>
         </div>
         <span style="font-size: 30px;cursor: pointer;" onmousedown="openSideNav()">&#9776;OPEN</span>
     </section>
