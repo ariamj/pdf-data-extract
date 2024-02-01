@@ -1,5 +1,6 @@
 :root {
     --hamburger-circ-size: 1rem;
+    --upload-container-w: 27.375rem;
 }
 
 html {
@@ -109,7 +110,7 @@ header h1 {
  * CONVERSION PAGE STYLING
  */
  .conversion-page {
-    background-color: rgba(255, 0, 0, 0.2);
+    /* background-color: rgba(255, 0, 0, 0.2); */
     margin: 1rem;
  }
 
@@ -119,12 +120,12 @@ header h1 {
  }
 
  .upload-settings-container {
-    background-color: rgba(0, 0, 255, 0.25);
+    /* background-color: rgba(0, 0, 255, 0.25); */
     display: flex;
  }
 
  .upload-container {
-    width: 27.375rem;
+    width: var(--upload-container-w);
     height: 11.75rem;
     /* flex-shrink: 0; */
     margin: 0.31rem;
@@ -147,6 +148,13 @@ header h1 {
  input[type="file"],
  input[type="submit"] {
     display: none;
+ }
+
+ .uploaded-file-display {
+    color: rgba(255, 255, 255, 0.75);
+    max-width: var(--upload-container-w);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
  }
 
  .custom-btn {
@@ -193,15 +201,15 @@ header h1 {
   */
 
 .download-container {
-    background-color: rgba(0, 255, 0, 0.25);
+    /* background-color: rgba(0, 255, 0, 0.25); */
     margin: 1rem;
     padding: 1.5rem;
     text-align: center;
 }
 
 .download-btn {
-    background-color: rgba(255, 0, 0, 0.5);
-    /* background-color: inherit; */
+    /* background-color: rgba(255, 0, 0, 0.5); */
+    background-color: inherit;
     border: none;
     color: rgba(0, 0, 0, 1);
     font-weight: bold;
@@ -221,4 +229,16 @@ header h1 {
 .convert-prog {
     background-color: aqua;
     width: 30rem;
+}
+
+.progress-bar {
+    width: 30rem;
+    height: 1.25rem;
+}
+
+.progress-bar-container {
+    background-color: black;
+    display: inline-flex;
+    width: 30rem;
+    height: 1rem;
 }

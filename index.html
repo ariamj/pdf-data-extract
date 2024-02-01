@@ -21,11 +21,11 @@
         </section>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeSideNav()">&times;</a>
-            <a href="#">Bank Statements</a>
+            <a href="#ConvertBankStatements">Bank Statements</a>
             <a href="#">Customize</a>
         </div>
     </header>
-    <section class="conversion-page">
+    <section id="ConvertBankStatements" class="conversion-page">
         <h2>Convert Bank Statements</h2>
         <div class="upload-settings-container">
             <div class="upload-container">
@@ -34,6 +34,7 @@
                         <input type="file" id="myFile" class="button" name="filename">
                         Upload
                     </label>
+                    <div id="UploadedFileDisplay" class="uploaded-file-display">VeryVeryVeryVeryVeryVeryVeryVeryVeryLongFileNameExample.pdf</div><br>
                     <label class="custom-btn convert-btn">
                         <input type="submit">
                         Convert
@@ -68,9 +69,12 @@
         <div class="download-container">
             <!-- TODO: COMPLETE JS FOR... -->
             <!-- cite: https://www.w3schools.com/tags/tag_progress.asp#:~:text=Tip%3A%20Use%20the,the%20tag%20instead. -->
-            <progress id="convert-prog" value="32" max="100"></progress>
+            <progress id="convert-prog" class="progress-bar" value="32" max="100"></progress>
             <br>
+            <progress id="convert-prog" class="progress-bar progress-bar-side" value="100" max="100"></progress>
             <button class="download-btn"><i class="fa fa-download"></i> DOWNLOAD</button>
+            <progress id="convert-prog" class="progress-bar progress-bar-side" value="0" max="100"></progress><br>
+            <progress id="convert-prog" class="progress-bar" value="32" max="100"></progress>
         </div>
         <span style="font-size: 30px;cursor: pointer;" onmousedown="openSideNav()">&#9776;OPEN</span>
     </section>

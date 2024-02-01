@@ -3,6 +3,9 @@ from pdfminer.high_level import extract_pages, extract_text
 import json
 import csv
 import tabula
+import os
+import pandas as pd
+import glob
 from img2table.document import PDF, Image
 from img2table.ocr import PaddleOCR
 
@@ -67,30 +70,66 @@ from img2table.ocr import PaddleOCR
 ########################################################
 
 # PAGE/TABLE SETTINGS
-tableArea = [25, 0, 98, 100]
-tableColumns = [20, 52, 69, 82]
+# top, left, bottom, right
+tableArea = [17, 0, 68, 100]
+tableColumns = [13, 22, 55]
+
+# COLLECTION OF TABLEAREA AND TABLECOLUMNS VALUES FOR DIFFERENT PDFS
+# key = <pdf-type-name> ; value = { <tableArea>, <tableColumns> }
+borderlessTableValues = {
+    "td-bank-bank-statement": [ [41, 0, 77, 100], [30, 50, 65, 75] ],
+    "business-banking-bank-statement-page-1": [ [65, 0, 90, 95],  [16, 50, 66, 80]],
+    "business-banking-bank-statement-page-2": [ [14, 0, 20, 95],  [16, 50, 66, 80]],
+    "BMO-mastercard-statement": [ [17, 0, 68, 100], [13, 22, 55] ], # page 3
+    "BMO-mastercard-statement-wide": [ [22, 0, 32, 100], [16, 22, 66, 80] ], # page 3
+}
 
 # FILE SETTINGS
-fileName = "Tamarind_JantoApril"
-filePages = 1
+fileName = "file1"
+filePages = [3]
 
-# ocr = PaddleOCR()
+# BORDERLESS TABLES
+# pdf = PDF(f"./data/{fileName}.pdf", pages=[0, 2])
+# pdf_tables = pdf.extract_tables(borderless_tables=True)
+# # pdf_tables = pdf.extract_tables(ocr=ocr, implicit_rows=False, borderless_tables=True, min_confidence=50)
+# pdf.to_xlsx(f"./outFiles/{fileName}.xlsx", borderless_tables=True)
 
-pdf = PDF(f"./data/{fileName}.pdf", pages=[0, 2])
-pdf_tables = pdf.extract_tables(borderless_tables=True)
-# pdf_tables = pdf.extract_tables(ocr=ocr, implicit_rows=False, borderless_tables=True, min_confidence=50)
-pdf.to_xlsx(f"./outFiles/{fileName}.xlsx", borderless_tables=True)
-
-numTables1 = len(pdf_tables)
-print(numTables1)
-print("==========================")
-print(pdf_tables[0])
-print("==========================")
+# numTables1 = len(pdf_tables)
+# print(numTables1)
+# print("==========================")
+# print(pdf_tables[0])
+# print("==========================")
 # if (numTables1 > 1):
     # print(pdf_tables[1])
 
-# df = tabula.read_pdf("./data/Degree_Navigator.pdf", pages='all')
-# tabula.convert_into("./data/Degree_Navigator.pdf", "./outFiles/Degree_Navigator.csv", output_format="csv", pages='all')
+folderName = "mastercard"
+dirPath = f"./data/{folderName}"
+
+# DIR OF PDFs
+directory = os.fsencode(dirPath)
+for file in os.listdir(directory):
+    fileName = os.fsdecode(file)
+    print(fileName)
+    df = tabula.read_pdf(f"./data/{folderName}/{fileName}", pages=filePages, relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
+    tabula.convert_into(f"./data/{folderName}/{fileName}", f"./outFiles/{folderName}/{fileName}.csv", output_format="csv", pages=filePages, relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
+
+# tableArea = [17, 0, 68, 100]
+# tableColumns = [13, 22, 55]
+# df = tabula.read_pdf(f"./data/{folderName}/{fileName}.pdf", pages=[3], relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
+# tabula.convert_into(f"./data/{folderName}/{fileName}.pdf", f"./outFiles/{folderName}/{fileName}.csv", output_format="csv", pages=[3], relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
+
+# df = tabula.read_pdf(f"./data/{folderName}/{fileName}.pdf", pages=filePages)
+# tabula.convert_into(f"./data/{folderName}/{fileName}.pdf", f"./outFiles/{folderName}/{fileName}.csv", output_format="csv", pages=filePages)
+
+# all_files = glob.glob(dirPath + "/*.pdf")
+# df = []
+# for file in all_files:
+#     df = pd.concat(tabula.read_pdf(file, pages = filePages))
+# df.to_csv(f"./outFiles/{folderName}.csv", index = False)
+
+# REGULAR BORDERED TABLE
+# df = tabula.read_pdf(f"./data/{fileName}.pdf", pages=filePages)
+# tabula.convert_into(f"./data/{fileName}.pdf", f"./outFiles/{fileName}.csv", output_format="csv", pages=filePages)
 
 # SCRIPT
 # df = tabula.read_pdf(f"./data/{fileName}.pdf", pages=filePages, relative_area=True, relative_columns=True, area=tableArea, columns=tableColumns)
